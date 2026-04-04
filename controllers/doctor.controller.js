@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const Doctormodel = require("../models/doctor");
 const Tokenmodel = require("../models/token");
+const bcrypt = require("bcrypt")
 const ProtectedSign = require("../schema/schema")
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
@@ -9,14 +10,26 @@ const signup = async(req, res, next) => {
     const doctorme = req.body;
     const protectedsignup = ProtectedSign.safeParse(doctorme)
 
-    if(!protectedsignup){
+    if(!protectedsignup.success){
         return res.json({message: "Incorrect Credintials"})
     }
 
-    const InfoOfDoctor = await Doctormodel.create({
-        email: email,
+    const { email, username, password } = req.body
+    
+    const existedemail = await Doctormodel.findOne({
+        email: email
+    })
+
+    if(existedemail){
+        return res.json("This is email is already registored try going through Sign In page")
+    }
+
+    const hashedpassword = bcrypt.hash(10, password)
+
+    await Doctormodel.create({
+        email,
         username,
-        password: password
+        password: hashedpassword
     })
 
     const token = jwt.sign({
