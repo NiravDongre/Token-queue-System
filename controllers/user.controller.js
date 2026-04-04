@@ -1,14 +1,24 @@
 const Usermodel  = require("../models/user.js");
-const Tokenmodel = require("../models/token.js");
-const 
+const Tokenmodel = require("../models/token.model.js");
+const CustomError = require("../utils/CustomError.js");
+const UserValidation = require("../validations/user.validation.js");
 
 
 const user = async (req, res, next) => {
     try{
-        const { username, age, symptoms } = req.body;
+
+        const payload = req.body;
+
+        const createpayload = UserValidation.safeParse(payload);
+
+        if(!createpayload.success){
+            next(new CustomError("Incorrect Credintials"))
+        }
+
+        const { fullname, age, symptoms } = req.body;
 
         const infoOfUser = await Usermodel.create({
-            username,
+            fullname,
             age,
             symptoms
         });
@@ -19,7 +29,7 @@ const user = async (req, res, next) => {
 
         const Token = await Tokenmodel.create({
             Token: GenToken,
-            UserId: infoOfUser
+            UserId: infoOfUser._id
         })
 
         return res.status(201).json({

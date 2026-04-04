@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
-const Doctormodel = require("../models/doctor");
-const Tokenmodel = require("../models/token");
+const Doctormodel = require("../models/doctor.model");
+const Tokenmodel = require("../models/token.model");
 const bcrypt = require("bcrypt")
-const { ProtectedSign, ProtectedAuth } = require("../schema/schema");
+const { ProtectedSign, ProtectedAuth } = require("../validations/doctor.validation");
 const CustomError = require("../utils/CustomError");
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 

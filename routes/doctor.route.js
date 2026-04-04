@@ -1,6 +1,6 @@
 const { Router} = require("express");
 const { sign, doctor } = require("../controllers/doctor.controller");
-const { DoctorMiddleware } = require("../middleware/token.middlewarer");
+const { DoctorMiddleware } = require("../middleware/doctor.middlewarer");
 
 const DoctorRoute = Router();
 
