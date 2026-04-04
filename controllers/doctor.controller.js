@@ -1,16 +1,21 @@
 const jwt = require("jsonwebtoken");
 const Doctormodel = require("../models/doctor");
 const Tokenmodel = require("../models/token");
+const ProtectedSign = require("../schema/schema")
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
-console.log(Doctormodel)
+const signup = async(req, res, next) => {
 
-const sign = async(req, res, next) => {
+    const doctorme = req.body;
+    const protectedsignup = ProtectedSign.safeParse(doctorme)
 
-    const { doctorname, password } = req.body;
+    if(!protectedsignup){
+        return res.json({message: "Incorrect Credintials"})
+    }
 
     const InfoOfDoctor = await Doctormodel.create({
-        doctorname: doctorname,
+        email: email,
+        username,
         password: password
     })
 
@@ -24,9 +29,13 @@ const sign = async(req, res, next) => {
 
 }
 
+const signin = async(req, res, next) => {
+
+}
+
 const doctor = async(req, res, next) => {
 
-    const Allpatient = Tokenmodel.find();
+    const Allpatient = await Tokenmodel.find();
     return res.json({
         Patients: Allpatient
     })
@@ -34,5 +43,5 @@ const doctor = async(req, res, next) => {
 
 
 module.exports = {
-    sign, doctor, JWT_SECRET_KEY
+    signup, doctor, JWT_SECRET_KEY
 }

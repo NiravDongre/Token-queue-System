@@ -1,1 +1,12 @@
-// This will be added later because it's an side projects for resume
+
+
+ const main = async() => {
+    try{
+    await mongoose.connect(process.env.MONGO_URL)
+    console.log("MongoDB Connected")
+    }
+    catch(err){
+        console.log("The server crashed")
+    }
+}
+main()

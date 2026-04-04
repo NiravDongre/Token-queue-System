@@ -20,7 +20,8 @@ const user = async (req, res, next) => {
         const GenToken = lastToken ? lastToken.Token + 1 : 1
 
         const Token = await Tokenmodel.create({
-            Token: GenToken
+            Token: GenToken,
+            UserId: infoOfUser._id
         })
 
 
@@ -28,7 +29,6 @@ const user = async (req, res, next) => {
         message: "Your Token",
         Token: Token,
         User: infoOfUser
-
     })
 }
 

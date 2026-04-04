@@ -4,6 +4,7 @@ const ObjectId = Schema.ObjectId;
 
 const token = new Schema({
     Token: Number,
+    UserId: ObjectId,
     Time: {type: Date, default: Date.now}
 })
 
