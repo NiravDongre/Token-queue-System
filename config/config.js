@@ -9,4 +9,5 @@
         console.log("The server crashed")
     }
 }
-main()
+
+module.exports = main
