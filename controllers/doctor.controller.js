@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
-const Doctormodel = require("../models/doctor.model");
-const Tokenmodel = require("../models/token.model");
+const Doctormodel = require("../models/doctor");
+const Tokenmodel = require("../models/token");
 const bcrypt = require("bcrypt")
 const { ProtectedSign, ProtectedAuth } = require("../validations/doctor.validation");
 const CustomError = require("../utils/CustomError");

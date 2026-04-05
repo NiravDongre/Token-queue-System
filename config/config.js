@@ -1,4 +1,5 @@
 
+const mongoose = require("mongoose")
 
  const main = async() => {
     try{
@@ -6,7 +7,8 @@
     console.log("MongoDB Connected")
     }
     catch(err){
-        console.log("The server crashed")
+        console.log(`The is Error is ${err}`)
+        
     }
 }
 

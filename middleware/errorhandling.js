@@ -8,4 +8,4 @@ const error = (err ,req, res, next) => {
     return res.status(statusCode).json({ status, message })
 }
 
-module.exports = error
+module.exports = { error }

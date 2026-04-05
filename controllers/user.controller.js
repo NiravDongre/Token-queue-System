@@ -1,7 +1,7 @@
-const Usermodel  = require("../models/user.js");
-const Tokenmodel = require("../models/token.model.js");
-const CustomError = require("../utils/CustomError.js");
-const UserValidation = require("../validations/user.validation.js");
+const Usermodel  = require("../models/user");
+const Tokenmodel = require("../models/token");
+const CustomError = require("../utils/CustomError");
+const UserValidation = require("../validations/user.validation");
 
 
 const user = async (req, res, next) => {
